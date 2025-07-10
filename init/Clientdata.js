@@ -1,11 +1,15 @@
-// seedClients.js
+require('dotenv').config(); // ✅ always first
 const mongoose = require('mongoose');
-const Client = require('../models/Client.js'); // adjust path if needed
-require('dotenv').config();
+const Client = require('../models/Client.js'); // adjust path as needed
 
-mongoose.connect('mongodb://localhost:27017/Realtrust')
-  .then(() => console.log("DB connected"))
-  .catch(err => console.log(err));
+console.log("MONGO_URI is:", process.env.MONGO_URI); // ✅ Debug
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("✅ MongoDB connected"))
+.catch(err => console.error("❌ MongoDB error:", err));
 
 const dummyClients = [
   {
@@ -41,10 +45,15 @@ const dummyClients = [
 ];
 
 const seedDB = async () => {
-  await Client.deleteMany({});
-  await Client.insertMany(dummyClients);
-  console.log("Client data inserted");
-  mongoose.connection.close();
+  try {
+    await Client.deleteMany({});
+    await Client.insertMany(dummyClients);
+    console.log("✅ Client data inserted");
+  } catch (err) {
+    console.error("❌ Seeding error:", err);
+  } finally {
+    mongoose.connection.close();
+  }
 };
 
 seedDB();

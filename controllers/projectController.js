@@ -16,6 +16,7 @@ exports.addProject = async (req, res) => {
 exports.getAllProjects = async (req, res) => {
   try {
     const projects = await Project.find();
+    console.log(projects);
     res.render('/landing', { projects }); // optional if you build this view
   } catch (error) {
     res.status(500).send('Error fetching projects');

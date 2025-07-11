@@ -40,10 +40,10 @@
           <th>Email</th>
           <th>Subscribed At</th>
         </tr>
-      </thead>
+      </thead>  
       <tbody>
         <% subscribers.forEach(s => { %>
-          <tr>
+          <tr>  
             <td><%= s.email %></td>
             <td><%= new Date(s.subscribedAt).toLocaleString() %></td>
           </tr>

@@ -23,7 +23,7 @@ router.post('/contact', async (req, res) => {
 router.post('/subscribe', async (req, res) => {
   const { email } = req.body;
   await Subscriber.create({ email });
-  res.redirect('/');
+  res.redirect('admin/dashboard')
 });
 
 module.exports = router;

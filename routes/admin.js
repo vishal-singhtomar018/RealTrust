@@ -12,7 +12,7 @@ router.get('/dashboard', async (req, res) => {
   res.render('admin/dashboard', { contacts, subscribers });
 });
 
-// Add Project
+// Add Project  
 router.get('/project/add', (req, res) => res.render('admin/addProject'));
 router.post('/project/add', upload.single('image'), projectController.addProject);
 

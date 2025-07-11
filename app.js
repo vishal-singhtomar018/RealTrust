@@ -1,5 +1,4 @@
 require('dotenv').config();
-console.log("MONGO_URI:", process.env.MONGO_URI); 
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -11,8 +10,10 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
+app.set("views", path.join(__dirname, "views"));
 
-console.log("MONGO_URI:", process.env.MONGO_URI); // ✅ Add this temporarily
+// Static files
+
 // DB Connection
 mongoose.connect(process.env.MONGO_URI);
 
